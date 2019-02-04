@@ -1,0 +1,92 @@
++++++++++++++++++++++++INHALTSVERZEICHNIS+++++++++++++++++++++++++++++++
+Darknet befehle
+Darknet training setup
+Eigenen Datensatz aus Videos generieren
+Hilfreiche Befehle Bash
+Daten kopieren über ssh
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+tar xvf
+x=extract, v=verbose, f=file, c=create zum erstellen anstatt x
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Darknet befehle
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Zum starten des Trainings mit 2 GPUs, mit parent PID=1 und speichern der Ausagbe in einer Textdatei:
+setsid /home/pacheco/darknet/darknet detector train /home/pacheco/darknet/cyclist/cyclist.data  /home/pacheco/darknet/cyclist/train.cfg /home/pacheco/darknet/backup/train.backup -gpus 0,1 >> /home/pacheco/temp.txt
+
+setsid ./darknet detector train cyclist/cyclist.data  cyclist/train.cfg backup/train.backup -gpus 0,1 >> /home/pacheco/temp.txt
+
+##Alexeys##
+./darknet detector map ../darknet/cyclist/cyclist.data  ../darknet/cyclist/train.cfg ../darknet/backup/train_28000.weights
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Darknet training setup
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+python script to generate anchors in bilddaten, geht vielleicht nur für yolov2??:
+python gen_anchors.py -filelist cyclist_benchmark/train.txt -num_clusters 9 -output_dir generated_anchors
+
+von alexeydarknet:
+./darknet detector calc_anchors data/cyclist.data -num_of_clusters 9 -width 608 -height 608 -show
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Eigenen Datensatz aus Videos generieren
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Erstens Videos haben.
+Zweitens in image.c zeile ca. 306 beim TODO die drei Pfade anpassen. wohin die neuen daten kommen.
+Bsp für: /home/pacheco/data/Master/bilddaten/selfmade
+In bilddaten sollte eine restSelfmade.sh sein einfach ausführen
+alternativ:
+        in dem Ordner also hier selfmade:
+        nano bikenr.txt //erstellen und eine 0 reinschreiben
+        mkdir images
+        mkdir labels
+
+fullscreen wenn man was sehen will. ansonsten vortrainiertes netzwerk nehmen was man will sollte aber person und bike erkennen als class 0 und 1 oder ggf anpassen in image.c drawdetectionsCustom
+./darknet detector makedata cfg/coco.data cfg/yolov3.cfg yolov3.weights /home/pacheco/movie.mpg  -fullscreen
+
+
+Datensatz aufteilen mit scripts
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hilfreiche Befehle Bash
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+zum trainieren aufm powerpc
+setsid ./darknet detector train cfg/cyclist.data cfg/yolov3-cyclist.cfg darknet53.conv.74 -gpus 0,1
+
+zum checken von radfahrern im video und speichern in einzelnen bilddateien sowie generieren von label dateien.re
+./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights ../movie.mpg
+
+
+bash bulk file renaming (bizmate.biz Bulk rename files in linux)
+	for file in *; do mv $file "$file.txt" ;done
+	for file in *; do mv $file ${file%.txt} ;done     //richtig geiler shit parameter extension
+
+Zufällige auswahl an dateien  verschieben (im ordner wo die zu verschiebenen dateien sind ausführen, zb labels) 3000 ist die anzahl
+
+	shuf -zen3000 * | xargs -0 mv -t ../../train/labels
+
+Das kopiert aus dem label verzeichnis heraus, alle bilder aus den image ordner in den richtigen image folder, image folder muss bereits existieren
+wird aber auch nicht gebraucht weil in den txt dateien die komplett pfade zu den images stehen.
+	for file in *; do cp ../../images/${file/txt/jpg} ../images/  ;done
+
+für die txt files die in die config kommen einfach das hier. XXX ist eins von test,train,valid
+	for file in /home/pacheco/data/Master/bilddaten/cyclists/XXX/images/*; do echo $file > XXX.txt; done
+oder	
+	find `pwd`/train -name \*.png > train.list
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Daten kopieren über ssh
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-v verbose, -t nicht überschreiben, -e bitte verwende ssh von nach, -r rekursiv für ordner, geht mit ubuntu bash
+rsync -v -t -e ssh pacheco@10.149.71.3:/home/pacheco/data/Master/bilddaten/selfmade/images/ /mnt/c/DATA/master/selfmade/images/ -r
+
+einzelne daten kopieren mit scp, allerdings geht es nicht von remote nach remot zu kopieren, geht mit powershell
+scp pacheco@10.149.71.3:~/test.xml pacheco@192.168.0.2:~/test.xml
+
+

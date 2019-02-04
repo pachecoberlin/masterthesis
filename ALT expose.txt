@@ -1,0 +1,38 @@
+erstes expose
+
+
+
+
+
+
+Die minimalen Primärziele dieser Arbeit sind, dass das VeloxCar  zuverlässig PKWs im Sichtfeld der Frontkamera erkennt. Weiterhin wird das VeloxCar dahingehend trainiert, dass andere VeloxCar erkannt werden.
+Zusätzliche wünschenswerte Sekundärziele sind die Position, Fahrtrichtung und Geschwindigkeit relativ zum VeloxCar zu ermitteln, sowie weitere sich bewegende Objekte zu erkennen (Menschen, Fahrräder, Motorräder, LKWs, usw.). 
+
+Zunächst wird eine ausführliche Literaturrecherche und Gespräche mit fachkundigen Professoren und Mitarbeitern geführt.
+Das Ergebnis wird eine möglichst aktuelle und vollständige Liste von Wissen, Methoden und Algorithmen sein für:
+\newline
+
+Primärziele
+\begin{itemize}
+\item Klassifizierung und Objekterkennung   auf digitalen Bildern
+\item Neuronale Netze in der Bilderkennung
+\item Bildverarbeitung zur Merkmalsextraktion und Objekterkennung
+\end{itemize}
+
+Sekundärziele für erkannte Objekte/Merkmale
+\begin{itemize}
+\item Positionsbestimmung 
+\item Bewegungsrichtung
+\item Geschwindigkeit
+\end{itemize}
+
+Die Ergebnisse der einzelnen Punkte werden dann gegenübergestellt, um die Techniken auszuwählen, welche vermutlich am schnellsten und effizientesten sind. Bezüglich der Sekundärziele wird  versucht zuverlässige Ergebnisse ausschließlich anhand der Kamerabilder zu erhalten, aber die Verwendung von zusätzlichen Sensoren ist denkbar. 
+
+Die Implementierungen werden modular durchgeführt, um hohe Flexibilität  für die Erweiterbarkeit und die Wiederverwendbarkeit bzw. den Austausch bestimmter Teile der Implementierung zu gewährleisten. Insbesondere wird darauf geachtet, dass die Implementierungen auf andere Kameras und Kamerabilder übertragbar sind. Die Eingabedaten, welche verwendet werden damit die Erkennung von Fahrzeugen erfolgreich ist werden auf Datensätzen aus dem Internet beruhen. Für die Erkennung anderer VeloxCars wird ein Datensatz erstellt. 
+
+Die Evaluierung der Erkennung von Fahrzeugen erfolgt im Innenbereich anhand von  nachgestellten Fahrszenarien. Die Fahrszenarien könnten das Befahren einer Kreuzung, das Parken an einer Straße oder auf einem Parkplatz, das Fahren in einem Platoon oder ähnliches sein.
+Die Fahrzeugerkennung kann zur Evaluierung auch in das AVP Projekt integriert werden um  sie in einem Parkhaus, auf einem Parkplatz oder auf offener Straße zu testen. 
+Es wird evaluiert wie sich die Erkennungsrate im Verhältnis zu der Anzahl der Eingabedaten verhält und die benötigte Rechenzeit. Sekundärziele werden hinsichtlich ihrer Genauigkeit und der benötigten Rechenzeit evaluiert.
+
+Das optimale Ergebnis wäre ein Algorithmus, welcher bei minimaler Rechenzeit unter unterschiedlichsten Licht- und anderen Umgebungsverhältnissen fehlerfrei andere Verkehrsteilnehmer erkennt und die exakte Position, Bewegungsrichtung und Geschwindigkeit ermittelt. 
+Darauf aufbauend können weitere Kameras installiert werden um einen rundum Blick zu erhalten um anschließend autonome Kollisionsvermeidung, Überholmanöver und vieles mehr zu implementieren.

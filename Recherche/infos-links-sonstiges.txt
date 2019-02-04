@@ -1,0 +1,80 @@
+Thema 1: Sensor Filterung Distanzsensoren
+
+                - Filterung der Distanzsensoren (Ultraschall, Infrarot und Lidar) um Noise-Effekte der einzelnen Sensortypen auszugleichen
+
+                - Schätzung des Distanzwert und Plausibilisierung durch tatsächlich gemessene Distanz
+
+                - z.B. durch Kalman Filterung
+
+                - generisches Filterungskonzept (für US, IR, Lidar einsetzbar)
+
+                - Validierungskonzept für Sensorgenauigkeit
+
+ 
+
+Thema 2: Objekt Erkennung Fahrzeuge
+
+                - Front Kamera und ggf. Fusion mit US Sensor (front)
+				Darf  ich auch das Lidar benutzen ggf ausschließlich?
+				Nur Front, sollte das Auto nicht rundherum alle Autos erkennen?
+				Nur Autos?
+				
+				Radar vs Lidar:
+				https://www.sensorsmag.com/components/lidar-vs-radar				
+				http://www.cbcity.de/fahrzeugumfeldsensorik-ueberblick-und-vergleich-zwischen-lidar-radar-videos/object-recognition-deep-learning-and-machine-learning-for-computer-vision-1506691487708
+				http://robotsforroboticists.com/lidar-vs-radar/
+
+                - Unterschiedliche Erkennungsalgorithmen CNN, ....
+deep learning mit cnn: Man kann ein pretrained CNN nehmen  da gibt es einige. alexanet googlenet vgg16/19 ...
+ und transfer learning verwenden. um nur für neue objekte die merkmale zu trainieren.
+                - Erstellung von Objektlisten (ID, Position, Abmessungen des Objekts) wie bereits in der Praxis Automotive eingesetzt (Radar)
+				
+				
+				- Betrachtung in Bezug auf Embedded Laufzeit Fähigkeit      
+				Ggf. GPU nötig.
+
+
+ 
+ 
+########################################################################
+MatLab
+ http://de.mathworks.com/help/nnet/ug/pretrained-convolutional-neural-networks.html
+ https://de.mathworks.com/campaigns/offers/machine-learning-with-matlab.confirmation.html?elqsid=1529847494509&potential_use=Student
+
+Video Tutorial matlab und deep learning
+https://de.mathworks.com/videos/object-recognition-deep-learning-and-machine-learning-for-computer-vision-1506691487708.html
+
+ Einführung in deep learning mit Matlab
+ https://de.mathworks.com/campaigns/offers/deep-learning-with-matlab.html?elqCampaignId=6443&s_tid=prod_eb_pers_dl  
+
+Neural Network Toolbox
+https://de.mathworks.com/products/neural-network.html 
+
+##################################################################
+Deep Machine Learning: (aus http://www.logivations.com/de/land/pdf/KameraBasierte_Objekterkennung.pdf)
+Neuronale Netzwerke “lernen”
+selbstständig die für die
+Objektidentifikation benötigten Muster
+ Umfangreiche Datenbanken mit
+Trainingsdaten ermöglichen bisher
+unerreichte Erkennungsraten
+(übertreffen menschliche Entscheider)
+ Einmal gelernte Muster können auf
+andere Aufgabenstellungen übertragen
+werden -> in der Praxis sind bereits
+wenige Beispielbilder ausreichend
+ Inzwischen sehr schnell: < 0.1 Sekunden
+pro Bild
+
+
+
+
+Thema 3: Trajektorienplanung
+
+                - Planung von Trajektorien auf Basis von Belegungskarten, Kamerabildern (Lane Keeping), Parklückenerkennung, ….
+
+                - Erstellung von Einparktrajektorien mit unterschiedlichen Trajektorienphasen
+
+                - Validierungskonzept für Trajektorien (Was ist eine gute Trajektorie? Geringster Weg, Geringe Komplexität, …?
+
+                - Haupt Use-Case Einparkvorgang -> andere Beispiele Abbiegeszenarien, Ausweichen, …

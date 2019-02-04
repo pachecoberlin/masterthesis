@@ -1,0 +1,194 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Datensatz erstellen, Netzwerk trainieren, Datensatz verbessern
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Stand 21.01. Training mit Benchmark bringt um die 60% Erkennungsrate bei selfmade Datensatz. weit weg von gut desweegen wird jetzt mit benchmark und eigenen 500.000 trainingseinheiten gemacht.
+Immer wenn ein Training beendet ist ein neues starten!!
+
+
+
+
+
+Stichprobenartig meinen eigenen Datensatz überprüfen.
+-> ja ergebnis is alles kacke... ne stimmti nicht ganz, aber im cyclist benchark ist mir mindestens ein fahrrad aufgefallen, dass nicht gelabeld war. Im eigenen gibt es wie erwartet fehler wenn mehrere Fahrräder erkannt wurden.
+zu 3.) image wird geöffnet und label und box drauf gemalt.. direkt drauf kann so nicht gespeichert werden. 
+
+labeldir über die scrapeCyclist images rüberlaufen lassen.
+
+Videos mit yolov3 auseinandernehmen. nachdem training nummer zwei fertig ist. dazu brauche ich aber videos dazu brauche ich eine playlist mit videos.
+
+
+1.Bilder von google runterladen und videos. und zwar alles in einen ordner wegen doppelten... py script anschauen modifizieren
+2. algorithmus(darknet) erweitern um mehrere einzelne bilder zu überprüfen
+3. Datensatz überprüfen
+4. trainieren mit vielen neuene daten :)
+5. die fertig trainierten validieren! detector valid und valid2, recall? -> Recall, aber muss noch IOU korrigiert werden und alle Auswertungen sammeln
+6. wenn nicht gut was tun??? Trainingsparameter tunen länger trainieren und vor allem DATEN genaue und viele! Rücksprache halten!
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1.Bilder von google runterladen und videos. und zwar alles in einen ordner wegen doppelten... py script anschauen modifizieren
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Problem pro anfrage werden nur knapp 90 bilder geladen. hab jetzt mit 17 queries 1500 bilder.
+
+es gibt noch einen ansatz wo man per query knapp 900 bilder bekommt, hat aber mit händischem scrollen und copypaste zu tun.
+sowie pinterest fotos downloaden. siehe in scrapecyclist urlsOfImages oder auch bookmark in datensatzfotos.
+
+Ich setzt hier glaube ich lieber auf videos.
+Noch kein Plan wie ich videos automatisch runterlade... ist auch ein bisschen die frage ob ihc das will... könnte schnell explodieren die größen.
+Aber ich brauche hier noch ein script oder cmd line die mri die videos runterlädt.
+youtube-dl ist super... brauche eine playlist.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2. algorithmus(darknet) erweitern um mehrere einzelne bilder zu überprüfen
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+darknet labeldir
+DONE: Ich will zum einen ein Programm das alle Dateien aus einem Ordner anschaut.
+
+
+
+DONE:Dann soll das checken ob Radfahrer drauf sind und diese labeln.
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+3. Datensatz bzw. labeling überprüfen
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Für einen Ordner soll alle Bilder inklusive bbox aus dem label.txt angezeigt werden( aber nicht drauf malen!!!):
+dann:
+-mindestens entscheiden können ob behalten oder löschen/verschieben.
+-optimal wäre wenn man die bbox verschieben könnte und die neuen daten in label.txt gespeichert werden.(das sollte aber erst gecheckt werden ob das nötig ist.)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+4. trainieren mit vielen neuene daten :)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hilfreiche Befehle Bash
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+zum trainieren aufm powerpc
+setsid ./darknet detector train cyclist/cyclist.data cyclist/train.cfg darknet53.conv.74 -gpus 0,1
+
+zum checken von radfahrern im video und speichern in einzelnen bilddateien sowie generieren von label dateien.
+./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights ../movie.mpg
+
+
+bash bulk file renaming (bizmate.biz Bulk rename files in linux)
+	for file in *; do mv $file "$file.txt" ;done
+	for file in *; do mv $file ${file%.txt} ;done     //richtig geiler shit parameter extension
+
+Zufällige auswahl an dateien  verschieben (im ordner wo die zu verschiebenen dateien sind ausführen)
+	shuf -zen3000 * | xargs -0 mv -t ../../train/labels
+
+Das kopiert aus dem label verzeichnis heraus alle bilder aus den image ordner in den richtigen image folder image folder muss bereits existieren
+	for file in *; do cp ../../images/${file/txt/jpg} ../images/  ;done
+
+für die txt files die in die config kommen einfach das hier. XXX ist eins von test,train,valid
+	for file in /home/pacheco/data/Master/bilddaten/cyclists/XXX/images/*; do echo $file > XXX.txt; done
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Mehr data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+So da die performance noch krass schlecht ist... dachte ich es könnte an den trainingsdaten liegen. 
+Ergo bruache ich mehr und verschiedene Daten.
+
+Ich nehme das fertige yolov3 welches Menschen und Fahrräder ziemlich gut erkennt und verwende es um auf bildern radfahrer zu erkennen. Mein algorithmus erkennt überscheidungen von Mensch und Fahrrädern wird dementsprechend fehlerhafte bilder zulassen. Für die große Masse sollte das aber im Endeffekt kein Problem sein.
+Könnte vielleicht doch ein problem sein, deswegen wurde der Algorithmus überarbeitet. Insbesondere bei mehrfach überschneidungen wird geprüft welche Person Fahrrad kombination die größte Überschneidungsfläche bietet. Dadurch werden sehr gute Ergebnise erzielt. Der fehlerhafte Anteil bleibt bei nicht erkannten Radfahrern was beim lernen sehr störend wirken könnte.
+
+Ich habe einfach direkt in Darknet den Algorithmus eingefügt während des malens der bounding boxes in image.c draw_detections. Es werden alles Personen und Fahrräder festgehalten, alle anderen Klassen werden ignoriert. Dann wird gematched welche Perosnen zu welchen Fahrrädern gehören. Anhand dieser Daten wird erkannt ob ein Radfahrer abgebildet ist. Die entsprechenden Label Dateien zum trainieren werden auch gleich erstellt. 
+Es kann auf videos und einzel bilder angewendet werden. wobei bei einzelbilder jedesmal die gewichte geladen werden. d.h. ich bruache in detector.c noch eine änderung um viele dateien zu detecten...  aber nur wenn ich den Ansatz verfolge mit runtergeladenne Bildern einen Datensatz zu erstellen.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Trainieren
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Was macht darknet... kp...
+wie trainiert darknet:
+es bekommt eine weights datei... zum trainieren eine vortrainierte datei... die sind mir noch ein komplettes rätsel
+es bekommt eine cfg datei. in der cfg datei steht drin:
+	allgemeine infos über das netzwerk u.a. wie trainiert wird
+	Dann wird jeder einzelne Layer beschrieben yolov3 verwendet 107 layer convolutional(75), shortcut(23), route(4), upsample(2) und yolo(3)
+es bekommt dann noch eine .data datei:
+	hier steht die anzahl der klassen drin, bei uns nur eine
+	der pfad zur datei wo pro zeile ein pfad eines trainingsbildes steht
+	der pfad zur datei wo pro zeile ein pfad eines VALIDIERUNGSbildes steht 
+	der pfad zur datei der klassen namen
+	der pfad zum backup ordner
+
+Aus den Pfaden der .data Datei wird wohl auch zu den labels navigiert... gleich erstmal schauen wie das bei coco aussieht
+
+als cfg datei wurde die yolov3-voc.cfg als grundlage verwendet. Die ersten 400 Trainingsrunden mit width=height=224 dann mit 416. Weiss mal wieder auch nicht was das heißt... und in der yolov3.cfg steht glaube ich 608. Soll immer ein vielfaches von 32 sein.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Setting up the data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2 Scripts in Java geschrieben um die Groundtruth Daten(waren im json format) in für Darknet geforderter txt daten zu wandeln.
+labels haben klassennummer x y width heigth, RELATIV ZUR BILD höhe und breite
+Bei mir nur eine Klasse cyclist
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Getting the data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Dazu hab ich mir ein Script von irgendwem genommen und nur die google query geänder ergebins 320 Bilder, nicht alle mit Radfahrern -> viel zu wenig. und ohne labels die man selber machen müsste
+
+bei der google query kommen ganz viele radfahrer  bilder "how to get cyclist images"
+cyclist images
+
+TOP Ergebnis!!
+http://www.gavrila.net/Datasets/Daimler_Pedestrian_Benchmark_D/Tsinghua-Daimler_Cyclist_Detec/tsinghua-daimler_cyclist_detec.html
+reference to publikation und das der datensatz ergänzt wurde
+
+Liste von Instagram Hashtags.
+https://www.scarletfire.co.uk/instagram-cycling-hashtags/
+
+http://www.pedbikeimages.org/usage.php	umständlich zum runterladen und nicht gelabeled
+
+http://homepages.inf.ed.ac.uk/rbf/CVonline/Imagedbase.htm - ich glaube hier is nix bei
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+google open image
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# ich glaube python code beispiele
+https://www.kaggle.com/paultimothymooney/how-to-query-the-open-images-dataset
+
+#um die labels zzu erhalten
+SELECT
+  *
+FROM
+  `bigquery-public-data.open_images.dict`
+WHERE
+  label_display_name LIKE '%cycl%'
+;
+
+/m/03hr1p  = Road cycling
+
+table images
+Zeile	image_id	subset	original_url	original_landing_url	license	author_profile_url	author	title	original_size	original_md5	thumbnail_300k_url
+
+#Dis waren krass schlechte ergebnisse egal ob confidence 1 oder 0 war, vllt besser aus der labels tabelle nur von menschen gemachte nehmen...
+SELECT  original_url
+FROM  `bigquery-public-data.open_images.labels`, `bigquery-public-data.open_images.images`
+  WHERE confidence =1.0 AND label_name = '/m/03hr1p'
+  LIMIT  10;
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DONE
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# modified image.c draw detection
+für bilder auf denen nur ein fahrrad und ein mensch zu sehen ist und erkannt wurde wird statdessen eine boundingbox um den Radfahrer erstellt. -> Geht natürlich gar nicht... der algorithmus wird vorerst nicht fortgeführt.
+
+# Darknet forken und in mein git laden
+
+# Hab mir jetzt ein einzelnes Bild rausgeschnitten aus video und yolo erkennt relativ schlecht Fahrrad und Person über einander und jetzt heisst es daraus ein Radfahrer zu erzeugen. Mit den Daten der Prediction.
+
+Ich muss mir cdt einrichten, und dann schauen wo die rahmen um die erkannten objekte sind um personne und fahrräder abzugleichen und verschmelzen zu lassen.
+CDT check war easy
+Stelle finden auch easy
+
+
+Das war noch ich glaube recommended vom Cuda install
+Cuda install 7.2.1 persistence daemon beim autostart bzw überhaupt starten
+
+

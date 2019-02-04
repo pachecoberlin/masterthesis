@@ -1,0 +1,67 @@
+Die Problemstellung des Schreibprojekts:
+
+Automobilhersteller prognostizieren die ersten vollautomatischen Fahrzeuge für das Jahr 2030. Vollautomatisch bedeutet, dass das Fahrzeug  ein Ziel erhält,  selbstständig dorthin fährt und es keine Fahrer sondern nur Fahrgäste gibt.
+Damit ein Auto autonom vom Startpunkt bis zum Zielpunkt gelangt benötigt es Wissen. Angefangen bei wo befindet sich die Straße bzw. die korrekte Fahrbahn, über welche Verkehrsregeln gelten aktuell bis hin zu wann bremse ich wie stark ab und wo ist ein Parkplatz. 
+Um das Wissen zu erlangen diese Fragen zu beantworten können verschiedenste Methoden und Technologien gewählt werden. Die Verwendung einer Kamera, welche fortlaufend Bilder der aktuellen Szene aufnimmt, wäre eine Möglichkeit Informationen zu sammeln um das benötigte Wissen zu erlangen.
+Zusätzlich ist das autonome lösen vieler komplexer Verkehrsszenarien nötig.
+Verkehrsszenarien sind allerdings so vielfältig, dass man leider nicht für jedes Szenario eine Lösung bereitstellen kann. Vielmehr müssen, wie es auch der Mensch im Verkehr handhabt, aus dem Kontext heraus Entscheidungen getroffen werden. 
+ Dies kann nur auf Basis vollständiger Umgebungsdaten möglich sein.
+ Ein wesentlicher Teil davon liegt in der Erkennung und Klassifizierung von Objekten im aktuellen Verkehrsszenario. 
+
+
+Der aktuelle Forschungsstand zum Thema:
+
+Der aktuelle stand ist hochautomatisiertes Fahren, welches vom Audi A8 und mehreren Modellen des Autoherstellers Tesla unterstützt wird. Audi behauptet, es sei das erste Serienauto auf dieser Automatisierungsstufe und macht deutlich, dass das System nur auf Autobahnen und baulich abgetrennten Straßen verwendet werden soll. Das System von Audi heißt AI Staupilot und ist derzeit in Europa noch nicht gesetzlich zugelassen.
+Tesla bietet ein Fahrerassistenzsystem namens Autopilot es kann die Spur und die Geschwindigkeit halten, vorausfahrende Fahrzeuge werden erkannt und verfolgt und es klassifiziert PKWs, LKWs und Motorräder. Es kann keine Fahrräder klassifizieren oder erkennen.
+Es gibt vereinzelt zugelassene autonome Fahrzeuge, wie das Googlecar oder von der Firma Uber nachgerüstete Serienautos.
+In Kalifornien ist es seit April 2018 gesetzlich erlaubt Fahrzeuge ohne Lenkrad und Pedale zu betreiben.
+
+WELCHER LEVEL IST DAS 4 ODER 5
+
+Für weitere Automatisierung liegt ein Schwerpunkt auf dem Erkennen und Klassifizieren aller Objekte in Verkehrsszenarien. Dazu zählen Tiere (Wild, Hunde, Hasen, Vögel, usw.), Hindernisse (Bäume, Absperrungen, Pfeiler, Fahrbahnbegrenzung, usw.), Verkehrsteilnehmer (Trikes, Segways, Fahrräder, Skater, usw.) und auch sonstige Objekte (Plastiktüten, Heuballen, vom Laster fallende Gegenstände, usw.)
+
+Im Jahr 2016 wurden vom ADAC Notbremsassistenten führender Automobilhersteller getestet, das Ergebnis in Bezug auf das Erkennen von Fahrradfahrern ist mangelhaft: die meisten Fahrradfahrer werden vom Notbremsassistenten der jeweiligen Automobilhersteller überhaupt nicht erkannt und ohne Geschwindigkeitsreduktion  überfahren. Der Audi A4 hat mit einem Erfüllungsgrad von 50\% noch die beste Bewertung bei diesem Testszenario. 
+Der Volvo V60 fällt komplett durch, obwohl er nach Herstellerangaben ein Notbremsassistent mit automatischer Fußgänger- und Fahrradfahrer-Erkennung besitzt.
+Das Thema Fahrradfahrererkennung in autonomen Systemen gewinnt immer mehr an Relevanz: die Anzahl der schwerverletzten Unfallbeteiligten Fahrradfahrer in Berlin stieg von 480 in 2001 auf 681 in 2017 - ein Anstieg um 141\%.
+Radfahrer haben über 80\% ihrer Unfälle mit Kfz.
+Jeder 8. Verkehrsunfalltote in Berlin ist Fahrradfahrer. 
+
+Die Klassifizierung und Lokalisierung von Objekten mittels handgeschriebenen Algorithmen des maschinellen Sehens, wurde spätestens 2012 deutlich von Deep Learning Algorithmen abgelöst. Als Geoffrey Hinton ein neuronales Netzwerk trainierte besser als Menschen Bilder zu erkennen. Das neuronale Netzwerk heißt AlexNet und ist mittlerweile nicht mehr aktuell, wird jedoch als Grundlage für neue Forschungen verwendet.
+Deep Learning ist ein Bereich des maschinellen Lernens, es verwendet eine Reihe von Techniken zur automatischen Erkennung und Wiederverwendung von Merkmalen und wendet diese mit einem künstlichen neuronalen Netzwerk an. 
+Diese Technik erzielt zur Zeit in vielen Bereichen Durchbrüche, weil sie besser als Menschen ist. Sei es ein künstlicher Go-Spieler, Erkennung verschiedenr Krankheiten in der Medizintechnik oder das Erkennen von Baumrinde auf einem Foto. So wird auch in der Automobilindustrie stark auf Deep Learning gesetzt um verschiedene Probleme zu lösen. 
+
+Die Fragestellung der Arbeit:
+
+Es folgt die zentrale Fragestellung, welche diese Arbeit beantwroten soll und anschließend eine Erörterung dieser.
+Können mit Open-Source-Software für Deep Learning zuverlässig Fahrradfahrer  auf Kamerabildern unterschiedlicher realer Verkehrsszenarien  in Sekundenbruchteilen klassifiziert werden? 
+Das von mir gewählte neuronale Netzwerk, welches mit Deep Learning trainiert wird ist ein vortrainiertes Convolutional Neural Network (CNN) namens YOLO. YOLO ist ein akronym für You Only Look Once.
+Zuverlässig bedeutet im Straßenverkehr und insbesondere in Hinsicht auf autonom agierende Fahrzeuge, dass es mindestens so gut sein sollte wie Menschen Fahrräder erkennen können. Mit liegen keine Zahlen über die Erkennungsrate von Menschen vor. Ich veranschlage hier 99,99\% und füge hinzu, dass das einenicht erkannte Fahrrad von 10 000 erkannten hoffentlich nicht überfahren wird. Es muss ja dann acuh Gründe für das nicht erkennen geben, diese könnten sein, dass das Fahrrad zu weit weg oder fast vollständig verdeckt war. Zusätzlich muss die Fehlerrate, also das erkennen von Fahrrädern obwohl keins vorhanden ist sehr gering sein. Hierbei ist es natürlich auch entscheidend wie bzw. wo und wieso Fahrräder erkannt wurden obwohl keins im Bild war. Diesmal auch schon in Hinsicht auf autonom agierende Fahrerassistenzsyteme, wie sie bereits verwendet werden, zum Beispiel des Notbremsassitenten, wenn dieser ein Fahrrad und damit einhergehend eine Gefahr erkennt könnte er unvermittelt eine Vollbremsung durchführen. Das könnte Verkehrsteilnehemer hinter ihm in Schwierigkeiten bringen. Da bei diesem Beispiel ein zusätzliches System zum Einsatz kommt, welches fortwährend die gesamte Verkehrsszene vor dem Auto auswertet, sollte das System auch eine Fehlmeldung eines einzelnen Bildes kompensieren können. Nichtsdestotrotz sollte jedes Teilsysteme so präzise wie möglich arbeiten. Mit einer maximalen Fehlerrate von 1\% wären das bei angenommenen 50fps ein Fehler in zwei Sekunden. Dabei sind 50 Bilder in der Sekunde schon eine sehr hohe Zahl.
+Fahrräder gibt es in vielen verschiedenen Arten und Formen. Im Rahmen dieser Arbeit beziehe ich mich lediglich auf Fahrräder für eine Person mit zwei Rädern in verschiedenen Größen. Das bedeutet Mountainbikes, Stadträder, Rennräder, Laufräder, Kinderräder, Trekkingräder, Tourenräder, Crossrad, Cruiser und BMX. Dementsprechend werden Tandems, Liegeräder, Einräder, Dreiräder, Vierräder und andere nicht fokussiert.
+Die Kamerabilder kommen von einer Kamera welche auf einem  Modellauto, dem VeloxCar, aufmontiert ist. Das VeloxCar ist ein europäisches Förderprojekt. Die Steuereinheit, welche die Kamerabilder verarbeitet ist ein ODroid auf dem das Robot Operating System (ROS) als Betriebssystem arbeitet. (Je nachdem wie schnell ich vorankomme wäre es auch denkbar den Algorithmus auf einem umgebauten VW zu implementieren. Dieser besitzt vorne und hinten eine Weitwinkel Kamera).
+Mit unterschiedlichen realen Verkehrszenarien ist gemeint, dass der finale Algorithmus auf dem VeloxCar  durch fahren auf dem Bürgersteig getestet wird. Dabei werden verschiedene Tageszeiten, also Lichteinstrahlungswinkel und Lichstärke getestet. Die teilweise Verdeckung von Fahrrädern muss wahrscheinlich künstlich nachgestellt werden um sie zu testen. Der Geschwindigkeitsaspekt soll auch getestet werden, allerdings kann dort die Leistung der Kamera eine Limitation aufweisen.
+Der Algorithmus muss in Sekundenbruchteilen arbeiten, weil erstens mehrere Bilder in der Sekunde ausgewertet werden sollen und nachgelagerte Systeme die aktuellen Informationen benötigen.
+Die Fahrräder sollen klassifiziert und bestmöglich lokalisiert werden um Entscheidungen für zum Beispiel einen Notbremsassistenten einfacher zu gestalten.
+
+Das Erkenntnisinteresse des Verfassers:
+
+Ich will nicht so gerne Überfahren werden als Fahrradfahrer und will wissen wieso Notbremsassistenten bei Fahrradfahrern versagen. Zusätzlich finde ich das Thema sehr spannend und will mir theorethisches und praktisches Wissen darüber aneignen. Darüber hinaus werde ich mich mit dem Robot Operating System beschäftigen, was meiner Karriere förderlich sein wird.
+
+Das Ziel bzw. die der Arbeit zugrundeliegende Hypothese:
+
+Die Annahme ist, dass ein vortrainiertes neuronales Netz schnell gute Ergebnisse erzielt, aber im Nachgang feinjustiert werden muss um die Zielvorgaben zu erreichen.
+
+Die Theorie(n), auf die Bezug genommen werden soll:
+
+Das verwendete YOLO System weist eine höhere Lokalisierungsfehlerrate als andere verfügbare Netze auf(YOLO Paper). Das Lokalisierungsproblem kann mit zusätzlichen Algorithmen oder Sensorfusion behoben werden. Das wird allerdings nicht teil dieser Arbeit sein.
+Es wird sich an der Arbeit  "Analysis and Improvement of the Visual Object Detection Pipeline" von Jan Hosang orientiert. Es wird geprüft welche Fehler auftreten und die vorgeschlagenen Techniken zur Verbesserung angewendet.
+
+Die Methode(n), nach der/denen vorgegangen werden soll:
+
+Daten werden  aus dem Internet gesammelt und selbstaufgenommen, damit YOLO diese auswerten kann. 
+Die Daten müssen  kategorisiert werden. Dies kann nach Verdeckung (, Geschwindigkeit) und Beleuchtung geschehen.
+Dabei wird festgehalten wieviele falsche Erkennungen, wieviele nicht Erkennungen und wieviele doppelte Erkennungen es gab. 
+
+Ich verwende Keras und YOLO und das ganze wird dann als ein ROS node auf dem VeloxCar implementiert.
+
+
+Die Quellen bzw. das Material, die/das verwendet werden soll/en:

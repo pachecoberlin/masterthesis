@@ -1,0 +1,47 @@
+Todo List:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+keep in mind:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Next:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#Ich bräuchte vielleicht erstmal ein schönes Datenset.
+Ich mach mir ein perfektes Datenset. Ich mach in python oder in c opencv fenster mit keylistener. Eigentlich habe ich ja schon meinen Checklabels algorithmus, also brauch ich da nur noch den Keylistener. Der sollte die guten in ein verzeichnis speichern die schlechten in ein verzeichnis speichern. Mit links und rechts vor und zurückgehen können. Zumindest den letzten merken und ggf. umspeichern können.
+
+#Ich muss unbedingt diese early stopping kriterien befolgen. D. h. ich muss checken wie ich checke wie der avarage loss auf dem validierungsset ist.
+Das könnte gehen mit de map fkt von alexey oder der recall odre valid fkt von jr oder nachdenken!
+
+#Map calls automatisieren und Ergebnis speichern
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Prio hoch:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#plot des validierungsset loss
+
+#Testdir funktion für directory mit bildern, ähnlich demo fkt
+
+#Bilder ohne Biker haben!!
+
+#Mit Yolo Mark die fehlenden Bilder im daimler benchmark labeln. Oder erstmal 2000 Stück.
+
+Done#Aufn Laptop auch diese scripts holen und schauen ob man damit plotten kann , ansonsten einfach von Alexey das plotting holen
+DONE#Plot des trainingsset loss
+DONE# und Mittelwertgerade
+Hab auf Arbeitslaptop das Script angepasst. genauso wie train.sh. Das zieht sich nur die wichtigen Zeilen als loss.txt und kopierts in den Python ordner. Checktraining bat macht alles automatisch und zeigt den aktuellen plot an.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Prio mittel:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DONE#Aufm ArbeitsLaptop einrichten das ich benachritigt werden, wenn training auhört
+
+#Eigenes Netzwerk machen oder yolo tiny oder so um schnell mal eben die trainings parameter checken zu können
+
+#Mit Yolo Mark mein eigenen Datensatz korrigieren, wobei ich mir da nochmal hart überlegen muss ob ich nicht einfach problematische Stellen großzügig rauswerfe und wenn ja wie ich das am besten mache.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Prio low:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DONE#in den loss.txt's immer nur die letzten Werte nehmen,denn die erste runde ist weg. Also eigentlich als hashmap implementieren.
