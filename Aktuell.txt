@@ -2,24 +2,44 @@ Todo List:
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 keep in mind:
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+cyclists train images gecheckt 343
+bench train gecheckt alle
+1000 Bilder 1h
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Next:
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Optionen:
+training mit: (V=Vorbereitung nötig)
+-V prio? aber nicht jetzt gleich oder doch? aus vielen videos biker bilder holen, auch wenn die ggf nicht perfekt sind. um damit zu trainieren.
+-prio? five weitertrainieren, aber wie? mit welchen einstellungen und welchen Datensatz?
+-NEXT mit allen Daten und korrekter cfg mal bis 50k trainieren inklusive nonvrus und leeren label dateien
+-prio? mit anderem Netzwerk trainieren oder anderen start gewichten?
 
-#Ich bräuchte vielleicht erstmal ein schönes Datenset.
-Ich mach mir ein perfektes Datenset. Ich mach in python oder in c opencv fenster mit keylistener. Eigentlich habe ich ja schon meinen Checklabels algorithmus, also brauch ich da nur noch den Keylistener. Der sollte die guten in ein verzeichnis speichern die schlechten in ein verzeichnis speichern. Mit links und rechts vor und zurückgehen können. Zumindest den letzten merken und ggf. umspeichern können.
-
-#Ich muss unbedingt diese early stopping kriterien befolgen. D. h. ich muss checken wie ich checke wie der avarage loss auf dem validierungsset ist.
-#Map calls automatisieren und Ergebnis speichern
-Das könnte gehen mit de map fkt von alexey oder der recall odre valid fkt von jr oder nachdenken!
+selber tun:
+NEXT sauberes Datenset
+-hoch checken ob man label dateien braucht wenn kein biker drauf ist.
+DONE sehr hoch vom benchmark die non-vru dateien miteinbeziehen beim training. 
+DONE??leere label dateien dafür erstellen.
+- checken welche yolo weights mit welcher auflösung die besten ergebnisse haben, allerdings muss ich das noch programmieren. ich hab nur die erkennung und die boundingboxes. müsste abgegelichen werden mit den vorhandenen boundingboxes.
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Prio hoch:
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Checken ob man mehrere Klassifier auf die gleichen labels trainiert.
 
+#Implementierung auf MCU
+*check wie oft alphabet geladen wird, darf nur einmal geladen werden, dauer zeit
+
+#Ich bräuchte vielleicht erstmal ein schönes Datenset.
+Ich mach mir ein perfektes Datenset. Ich mach in python oder in c opencv fenster mit keylistener. Eigentlich habe ich ja schon meinen Checklabels algorithmus, also brauch ich da nur noch den Keylistener. Der sollte die guten in ein verzeichnis speichern die schlechten in ein verzeichnis speichern. Mit links und rechts vor und zurückgehen können. Zumindest den letzten merken und ggf. umspeichern können.
+
+#Ich muss unbedingt diese early stopping kriterien befolgen. D. h. ich muss checken wie ich checke wie der avarage loss auf dem validierungsset ist.
 #plot des validierungsset loss
+SemiDONE#Map calls automatisieren und Ergebnis speichern-> calculateMaps.sh, könnte man auch noch für verschiedene auflösungen ausprobieren
+Das könnte gehen mit de map fkt von alexey oder der recall odre valid fkt von jr oder nachdenken!
+
 
 #Testdir funktion für directory mit bildern, ähnlich demo fkt
 
@@ -45,3 +65,6 @@ DONE#Aufm ArbeitsLaptop einrichten das ich benachritigt werden, wenn training au
 Prio low:
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 DONE#in den loss.txt's immer nur die letzten Werte nehmen,denn die erste runde ist weg. Also eigentlich als hashmap implementieren.
+
+
+#mit alexeys fork trainieren, allerdings kompilierungsprobleme, lauter c dteien die den g++ brauchen, wegen opencv, was auch nicht so richtig sein kann weil auf meinem laptop gehts ja. vllt eher doch ein opencv versions problem??

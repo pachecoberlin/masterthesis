@@ -18,18 +18,15 @@ def main(argv):
     parser.add_argument(   
         "-i",  dest='mod', 
         default=500, type=int,
-        help = "all values"
+        help = "mean is calculated over i values"
         )
-    params = parser.parse_args()
-
-    """    
-    parser.add_argument(
-        "log_file",
+    parser.add_argument(   
+        "-f",  dest='file', 
+        default="data\loss.txt", 
         help = "path to log file"
         )
-    f = open(args.log_file)
-    """  
-    f = open("data\loss.txt")
+    params = parser.parse_args()
+    f = open(params.file)
     lines  = [line.rstrip("\n") for line in f.readlines()]
     numbers = {'1','2','3','4','5','6','7','8','9'}
     iters = []

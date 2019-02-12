@@ -1,7 +1,8 @@
 Calculating map with alexeys Darknet
 
-./darknet detector map cyclist/cyclist.data  ../weights/finished_round_five../firsttrain.cfg ../weights/finished_round_five.../train_17300.weights
 
+############################################################################################################
+./darknet detector map cyclist/cyclist.data  ../weights/finished_round_five../firsttrain.cfg ../weights/finished_round_five.../train_17300.weights
 Für die fünfte runde mit richtigen cfg file und nur dem benchmark
 Validation images
 Testset:2916
@@ -138,7 +139,8 @@ komplettesset(bench test und valid und zweites eigenes): 13933
 ############################################################################################################
 ./darknet detector map cyclist/cyclist.data  ../weights/finished_round_four_both/train.cfg ../weights/finished_round_four_both/train_290000.weights -i 1
 
-man könnte noch den speicherabzug Fehler korrigieren, liegt SEHR wahrscheinlich weil ich 20 classes im cfg zu stehen habe. Damit man auch die anderen Werte erhält
+man könnte noch den speicherabzug Fehler korrigieren, liegt SEHR wahrscheinlich weil ich 20 classes im cfg zu stehen habe. 
+Damit man auch die anderen Werte erhält
 
 For the fourth round with both datasets
 validation images 13936 (bench=4000, eigene =10000)
