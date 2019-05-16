@@ -1,0 +1,16 @@
+Root
+|
+|Inhaltsverzeichnis (Dis hier)
+|Masterarbeit_Alexander_Wachtberger.pdf (The thing!!!)
+|Masterarbeit_Alexander_Wachtberger.docx (Formatierung zerschossen, weil aus PDF importiert)
+|---Dateien
+    |FFDS_loss_datei_zur_verwendung_mit_plot_py.txt (loss werte eines trainings kann mit "plot.py -f dateipfad" und installiertem Python angezeigt werden)
+    |genauigkeitstest_auswertung.txt (Ergebnis der Berechnung für beide Netzwerke und unterschiedliche Auflösungen)
+    |geschwindigkeitstest_auswertung.txt (Ergebnisse der Geschwindigkeitstest)
+    |map_ausgabe_von_vielen_gewichten.txt (Ergebnis eines Trainings)
+    |---Code,Skripts,Snippets (zum neu trainieren, zum checken ob training läuft, für nachm Training, zur Datensatzerstellung und -säuberung)
+    |--Videos (enthält die Videos die zur Generierung des eigenen Datensatzes verwendet wurden)
+|
+|---Geschwindigkeitstest (Enthält die Dateien die für die Geschwindigkeitstest verwendet wurden und eine Anleitung zur Durchführung)
+|
+|---Repos (Enthält die gezippten Dateien von drei Repository. Das FFDS; das modifizierten Darknet, zum trainieren und Datensatz erstellen; das modifizierten Darknet um es als Bibliothek zu für das FFDS zu verwenden)

@@ -1,0 +1,15 @@
+Ablauf 
+hol dir darknet von joseph
+git clone https://github.com/pjreddie/darknet.git
+sync test ordner mit darknet/cyclist ordner
+rsync -v -t -e ssh  /mnt/c/Users/awachtberger/Desktop/weights/test/ pacheco@10.149.71.3:~/awachtberger/darknet/cyclist/ -r
+nano Makefile
+cp cyclist/*.c src/
+make
+nano cyclist/ffds.cfg
+./darknet detector demo cyclist/cyclist.data cyclist/tiny.cfg cyclist/tiny.weights
+./darknet detector demo cyclist/cyclist.data cyclist/ffds.cfg cyclist/ffds.weights cyclist/movie.mpg
+
+
+
+Bei nvidia kann man die frequenz hochstellen und cpus anmachen und quiet modus ausmachen

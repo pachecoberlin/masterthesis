@@ -1,0 +1,34 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Vorm training
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+train.list und test.list ggf zusammenstellen, check scripts
+
+von alexeydarknet:
+./darknet detector calc_anchors cyclist/cyclist.data -num_of_clusters 9 -width 608 -height 608 -show
+
+train.cfg einstellen: insbesondere Anzahl klassen und dazugehörige Filter, width/height, anchors, learningrate strategy
+
+backup ordner erstellen
+~/loss.txt und temp.txt leeren
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Nachm training
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-die weights, train.cfg und eine info.txt(welche daten, config:anchors und learningrate) in einen neuen Ordner unter ~/weights
+-~/loss.txt und ~/temp.txt in den Ordner
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This might help :
+.5R is recall for IoU>0.5 and .75R is recall for IoU>0.75
+Where:
+Recall = TP / (TP + FN)
+TP = number of detections with IoU>0.5 (0.75)
+FP = number of detections with IoU<=0.5 (0.75)or detected more than once
+FN = number of objects that are not detected or detected with IoU<=0.5 (0.75)
+
+setsid /home/pacheco/darknet/darknet detector train /home/pacheco/darknet/cyclist/cyclist.data  /home/pacheco/darknet/cyclist/train.cfg /home/pacheco/darknet/backup/train.backup -gpus 0,1
+
+
+setsid darknet detector train cyclist/cyclist.data  cyclist/train.cfg backup/train.backup -gpus 0,1
+
+./darknet detector train cyclist/cyclist.data  cyclist/train.cfg darknet53.conv.74 -gpus 0,1 >> /home/pacheco/temp.txt

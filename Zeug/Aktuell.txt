@@ -1,0 +1,169 @@
+Todo List:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################################################################
+#########################################################################
+Könnte mach noch tun:
+
+- round ten mit halb sovielen Daten eine bessere Genauigkeit und TRefferrate aber miese Präzision.
+
+
+tiny3 oder 4 auf 1024x1024 testen und vllt auch zusärtlich mit niedrigerem thresh
+
+dann müssen sich das zwei leuten nochmal korrektur lesen
+also du und lena
+während dessen mach ich die bilder hübsch
+
+und die tabellen fertig machen
+
+ und dann die Rechtschreibkorrektur einarbeiten
+image_opencv.cpp ist die Kameranbindung
+
+map aufrufen mit höherem thresh für rouund ten
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Schreiben:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# Grundlagen 
+
+- In Fehlerrückführung könnte man noch sehr gut das Bild MachineLearningModel einführen
+
+# Lösung
+- Irgendwo erwähnen was genau alles modifiziert wurde im Darknet. Wird glaube ich schon so ungefähr gemacht...
+
+
+# System
+*detektierer = detektor!!
+*Zeitstempel bei der veröffentlichung? Bzw ein komplettes timing messen, wie?
+*Komponenten
+    - Komponenten oben Dateien unten! oder seitlich dann komponenten links und dateien rechts.
+
+
+
+
+
+
+
+
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+#########################################################################
+TODO nach Abgabe:
+    
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+keep in mind:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+high variance problem? try increase lambda!! regularization parameter
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Next:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Interface implementieren
+- Zeitstempel bei der veröffentlichung?!
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Prio hoch:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+!!!
+#Checken ob man mehrere Klassifier auf die gleichen labels trainiert. Das hier ist superinteressant, bzw. könnte das hier auch noch eine Forschung sein.
+!!!
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Prio mittel:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Testdir funktion für directory mit bildern, ähnlich demo fkt
+
+#Bilder ohne Biker haben!! Vielleicht brauch ich mehr ,aber FP ist glaube ich ok muss mal checken wie die fps aussehen
+
+# checken ob man label dateien braucht wenn kein biker drauf ist.
+
+# checken welche yolo weights mit welcher auflösung die besten ergebnisse haben, mit unterschiedlichen width und height in der config datei und der map Fkt von alexey
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Prio low:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Mehrere Kameras unterstützen!!!
+
+#mit alexeys fork trainieren, allerdings kompilierungsprobleme, lauter c dteien die den g++ brauchen, wegen opencv, was auch nicht so richtig sein kann weil auf meinem laptop gehts ja. vllt eher doch ein opencv versions problem??
+#Mit Yolo Mark mein eigenen Datensatz korrigieren, wobei ich mir da nochmal hart überlegen muss ob ich nicht einfach problematische Stellen großzügig rauswerfe und wenn ja wie ich das am besten mache.
+#Mit Yolo Mark die fehlenden Bilder im daimler benchmark labeln. Oder erstmal 2000 Stück.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Sauberes Datenset
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+TODO:
+-hochladen in gitlab
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DONE
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Aufn Laptop auch diese scripts holen und schauen ob man damit plotten kann , ansonsten einfach von Alexey das plotting holen
+#Plot des trainingsset loss
+# und Mittelwertgerade
+Hab auf Arbeitslaptop das Script angepasst. genauso wie train.sh. Das zieht sich nur die wichtigen Zeilen als loss.txt und kopierts in den Python ordner. Checktraining bat macht alles automatisch und zeigt den aktuellen plot an.
+#Ich bräuchte vielleicht erstmal ein schönes Datenset.
+Ich mach mir ein perfektes Datenset. Ich mach in python oder in c opencv fenster mit keylistener. Eigentlich habe ich ja schon meinen Checklabels algorithmus, also brauch ich da nur noch den Keylistener. Der sollte die guten in ein verzeichnis speichern die schlechten in ein verzeichnis speichern. Mit links und rechts vor und zurückgehen können. Zumindest den letzten merken und ggf. umspeichern können.
+#Aufm ArbeitsLaptop einrichten das ich benachritigt werden, wenn training auhört
+#in den loss.txt's immer nur die letzten Werte nehmen,denn die erste runde ist weg. Also eigentlich als hashmap implementieren.
+- sehr hoch vom benchmark die non-vru dateien miteinbeziehen beim training. 
+- mit allen Daten und korrekter cfg mal bis 50k trainieren inklusive nonvrus und leeren label dateien
+-benchmark train bilder durchgeschaut
+-doppelte aus gute bzw schlechte entfernen und die die in beiden vorhanden sind. python skript
+im checker:
+-mehrere am besten alle Bilder vor und zurück gehen können. für eigene easy
+-Die Bilder der Reihe nach durchgehen, insbesondere für die selbstgemachten
+-Bilder generieren
+-Bilder durchschauen
+
+#Training mit yolov3-tiny
+
+10.149.67.25
+nvidia
+nvidia
+Jetson Xavier:
+00:04:4B:CB:DA:61 <-> 10.149.71.16
+
+Jeston TX2:
+00:04:4B:C7:87:ED <-> 10.149.71.17
+00:04:4B:8C:9A:69 <-> 10.149.67.25
+
+Jetson TK1:
+00:04:4B:5A:EF:CC <-> 10.149.67.24
+
+Odroid:
+00:1e:06:32:41:2c <-> 10.149.67.17
+TODO <-> 10.149.67.16 
+
+10.149.71.20
+root

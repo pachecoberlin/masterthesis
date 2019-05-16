@@ -1,0 +1,8 @@
+classes= 1
+valid  = /home/pacheco/data/Master/bilddaten/train.list
+train  = /home/pacheco/data/Master/bilddaten/test.list
+names = cyclist/biker.names
+labels = cyclist/biker.names
+backup = backup
+eval=cyclists
+top=2

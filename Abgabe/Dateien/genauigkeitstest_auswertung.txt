@@ -1,0 +1,117 @@
+#################################################### 
+weights tiny 224
+
+class_id = 0, name = cyclist, 	 ap = 69.98 % 
+ for thresh = 0.25, precision = 0.87, recall = 0.69, F1-score = 0.77 
+ for thresh = 0.25, TP = 9117, FP = 1403, FN = 4181, average IoU = 65.76 % 
+
+ mean average precision (mAP) = 0.699850, or 69.98 % 
+#################################################### 
+weights tiny 320
+
+class_id = 0, name = cyclist, 	 ap = 71.13 % 
+ for thresh = 0.25, precision = 0.92, recall = 0.69, F1-score = 0.79 
+ for thresh = 0.25, TP = 9150, FP = 842, FN = 4148, average IoU = 73.84 % 
+
+ mean average precision (mAP) = 0.711306, or 71.13 % 
+Total Detection Time: 1271.000000 Seconds
+
+#################################################### 
+weights tiny 608
+
+
+class_id = 0, name = cyclist, 	 ap = 72.06 % 
+ for thresh = 0.25, precision = 0.93, recall = 0.75, F1-score = 0.83 
+ for thresh = 0.25, TP = 9981, FP = 768, FN = 3317, average IoU = 74.82 % 
+
+ mean average precision (mAP) = 0.720579, or 72.06 % 
+#################################################### 
+weights tiny 768
+
+class_id = 0, name = cyclist, 	 ap = 71.56 % 
+ for thresh = 0.25, precision = 0.91, recall = 0.74, F1-score = 0.81 
+ for thresh = 0.25, TP = 9796, FP = 964, FN = 3502, average IoU = 70.64 % 
+
+ mean average precision (mAP) = 0.715588, or 71.56 % 
+#################################################### 
+weights tiny 960
+
+
+class_id = 0, name = cyclist, 	 ap = 69.98 % 
+ for thresh = 0.25, precision = 0.87, recall = 0.69, F1-score = 0.77 
+ for thresh = 0.25, TP = 9117, FP = 1403, FN = 4181, average IoU = 65.76 % 
+
+ mean average precision (mAP) = 0.699850, or 69.98 % 
+
+
+####################################################
+weights großzwo 224
+
+class_id = 0, name = cyclist, 	 ap = 78.29 % 
+ for thresh = 0.25, precision = 0.83, recall = 0.80, F1-score = 0.82 
+ for thresh = 0.25, TP = 20088, FP = 3982, FN = 5068, average IoU = 64.85 % 
+
+ mean average precision (mAP) = 0.782874, or 78.29 % 
+
+####################################################
+weights großzwo 608
+
+class_id = 0, name = cyclist, 	 ap = 88.41 % 
+ for thresh = 0.25, precision = 0.83, recall = 0.95, F1-score = 0.88 
+ for thresh = 0.25, TP = 23908, FP = 5062, FN = 1248, average IoU = 67.24 % 
+
+ mean average precision (mAP) = 0.884094, or 88.41 % 
+
+####################################################
+weights großzwo 768
+
+class_id = 0, name = cyclist, 	 ap = 87.65 % 
+ for thresh = 0.25, precision = 0.80, recall = 0.95, F1-score = 0.87 
+ for thresh = 0.25, TP = 23936, FP = 5977, FN = 1220, average IoU = 63.60 % 
+
+ mean average precision (mAP) = 0.876452, or 87.65 % 
+ 
+####################################################
+weights groß 960
+
+  detections_count = 17325, unique_truth_count = 13298
+class_id = 0, name = cyclist,    ap = 79.04 %
+ for thresh = 0.25, precision = 0.81, recall = 0.80, F1-score = 0.81
+ for thresh = 0.25, TP = 10589, FP = 2421, FN = 2709, average IoU = 64.04 %
+
+ mean average precision (mAP) = 0.790359, or 79.04 %
+Total Detection Time: 485.000000 Seconds
+####################################################
+weights groß 224
+
+class_id = 0, name = cyclist, 	 ap = 62.71 % 
+ for thresh = 0.25, precision = 0.94, recall = 0.65, F1-score = 0.77 76,9%
+ for thresh = 0.25, TP = 8626, FP = 515, FN = 4672, average IoU = 73.50 % 
+
+ mean average precision (mAP) = 0.627136, or 62.71 % 
+####################################################
+weights groß 320
+class_id = 0, name = cyclist, 	 ap = 72.14 % 
+ for thresh = 0.25, precision = 0.95, recall = 0.73, F1-score = 0.82 
+ for thresh = 0.25, TP = 9661, FP = 488, FN = 3637, average IoU = 78.14 % 
+
+ mean average precision (mAP) = 0.721444, or 72.14 % 
+#################################################### 
+weights groß 608
+
+class_id = 0, name = cyclist, 	 ap = 80.97 % 
+ for thresh = 0.25, precision = 0.96, recall = 0.79, F1-score = 0.86 
+ for thresh = 0.25, TP = 10455, FP = 456, FN = 2843, average IoU = 79.55 % 
+
+ mean average precision (mAP) = 0.809693, or 80.97 % 
+
+
+####################################################
+weights groß 768
+class_id = 0, name = cyclist, 	 ap = 80.61 % 
+ for thresh = 0.25, precision = 0.92, recall = 0.80, F1-score = 0.85 
+ for thresh = 0.25, TP = 10593, FP = 933, FN = 2705, average IoU = 74.41 % 
+
+ mean average precision (mAP) = 0.806053, or 80.61 % 
+
+

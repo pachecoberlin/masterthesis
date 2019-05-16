@@ -1,0 +1,138 @@
++++++++++++++++++++++++INHALTSVERZEICHNIS+++++++++++++++++++++++++++++++
+Darknet befehle
+Darknet training setup
+Eigenen Datensatz aus Videos generieren
+Hilfreiche Befehle Bash
+Daten kopieren über ssh
+GIT
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+tar xvf archiv ziel/quelle
+x=extract, v=verbose, f=file, c=create zum erstellen anstatt x
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Darknet befehle
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Performance check:
+./darknet detector demo cyclist/cyclist.data /home/pacheco/data/ffds/tiny.cfg /home/pacheco/data/ffds/tiny.weights ~/movie.mpg
+
+
+Zum starten des Trainings mit 2 GPUs, mit parent PID=1 und speichern der Ausagbe in einer Textdatei:
+setsid /home/pacheco/darknet/darknet detector train /home/pacheco/darknet/cyclist/cyclist.data  /home/pacheco/darknet/cyclist/train.cfg /home/pacheco/darknet/backup/train.backup -gpus 0,1 | grep images >> /home/pacheco/temp.txt
+
+setsid ./darknet detector train cyclist/cyclist.data  cyclist/train.cfg backup/train.backup -gpus 0,1 | grep images >> /home/pacheco/temp.txt
+setsid ./darknet detector train cyclist/cyclist.data  cyclist/train.cfg backup/train.backup -i 1 | grep images >> /home/pacheco/temp.txt
+
+./darknet checklabeling path/to/images
+
+-thresh 0.5
+
+##Alexeys##
+./darknet detector map ../darknet/cyclist/cyclist.data  ../darknet/cyclist/train.cfg ../darknet/backup/train_28000.weights
+./darknet detector map ../darknet/cyclist/cyclist.data  ../weights/finished_round_nine/train.cfg ../weights/finished_round_nine/train_88516.weights
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Darknet training setup
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+SIEHE darknet training stuff.txt
+
+python script to generate anchors in bilddaten, geht vielleicht nur für yolov2??:
+python gen_anchors.py -filelist cyclist_benchmark/train.txt -num_clusters 9 -output_dir generated_anchors
+
+von alexeydarknet:
+./darknet detector calc_anchors data/cyclist.data -num_of_clusters 9 -width 608 -height 608 -show
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Eigenen Datensatz aus Videos generieren
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Erstens Videos haben.
+Zweitens in image.c zeile ca. 306 beim TODO die drei Pfade anpassen. wohin die neuen daten kommen.
+Bsp für: /home/pacheco/data/Master/bilddaten/selfmade
+In bilddaten sollte eine restSelfmade.sh sein einfach ausführen
+alternativ:
+        in dem Ordner also hier selfmade:
+        nano bikenr.txt //erstellen und eine 0 reinschreiben
+        mkdir images
+        mkdir labels
+
+fullscreen wenn man was sehen will. ansonsten vortrainiertes netzwerk nehmen was man will sollte aber person und bike erkennen als class 0 und 1 oder ggf anpassen in image.c drawdetectionsCustom
+./darknet detector makedata cfg/coco.data cfg/yolov3.cfg yolov3.weights /home/pacheco/movie.mpg  -fullscreen
+
+
+Datensatz aufteilen mit scripts
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hilfreiche Befehle Bash
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Bilder anzeigen
+eog image.jpg
+
+Webcam snapshot
+fswebcam -d /dev/video0 -s "Exposure (Absolute)=2500" -s "Gain=63"-i 0 -l 1 --list-controls test.jpg
+Mit diesen Einstellungen kann man etwas erkennen, bei der guten DFM 22BUC03-ML
+fswebcam -d /dev/video0 -s "Exposure (Absolute)=500" -s "Gain=20"
+fswebcam -v -S 1 -r"744x480" -l 1 -p GREY test.jpg
+
+Dos to Unix fileendings
+tr -d '\015' <DOS-file >UNIX-file
+
+grep für verschiedene Wörter
+cat finished_round_seven/all.data | grep -iE  "train|ap|precision"
+
+zum trainieren aufm powerpc
+setsid ./darknet detector train cfg/cyclist.data cfg/yolov3-cyclist.cfg darknet53.conv.74 -gpus 0,1
+
+zum checken von radfahrern im video und speichern in einzelnen bilddateien sowie generieren von label dateien.re
+./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights ../movie.mpg
+
+$1 ist der erste parameter
+ 
+bash bulk file renaming (bizmate.biz Bulk rename files in linux)
+	for file in *; do mv $file "$file.txt" ;done
+	for file in *; do mv $file ${file%.txt} ;done     //richtig geiler shit parameter extension
+
+Zufällige auswahl an dateien  verschieben (im ordner wo die zu verschiebenen dateien sind ausführen, zb labels) 3000 ist die anzahl
+
+	shuf -zen3000 * | xargs -0 mv -t ../../train/labels
+
+Das kopiert aus dem label verzeichnis heraus, alle bilder aus den image ordner in den richtigen image folder, image folder muss bereits existieren
+wird aber auch nicht gebraucht weil in den txt dateien die komplett pfade zu den images stehen.
+	for file in *; do p ../../images/${file/txt/jpg} ../images/  ;done
+    
+    for file in `ls`; do echo /home/pacheco/data/Master/bilddaten/benchmark/images/train/tsinghuaDaimlerDataset/${file/txt/png}  ;done > ../train.txt
+    for file in `cat nonvru.txt`;do  echo ${file/txt/png} ;done
+
+für die txt files die in die config kommen einfach das hier. XXX ist eins von test,train,valid
+	for file in /home/pacheco/data/Master/bilddaten/cyclists/XXX/images/*; do echo $file > XXX.txt; done
+oder	
+	find `pwd`/train -name \*.png > train.list
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Daten kopieren über ssh
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-v verbose, -t nicht überschreiben, -e bitte verwende ssh von nach, -r rekursiv für ordner, geht mit ubuntu bash
+rsync -v -t -e ssh pacheco@10.149.71.3:/home/pacheco/data/Master/bilddaten/selfmade/images/ /mnt/c/DATA/master/selfmade/images/ -r
+rsync -v -t -e ssh odroid@10.149.67.17:/home/odroid/ros_workspace/ /mnt/c/DATA/ros_workspace/ -r
+rsync -v -t -e ssh  /mnt/c/Users/awachtberger/Desktop/weights/tiny1/ pacheco@192.168.0.5:/home/pacheco/data/weights/tiny1/ -r
+
+rsync -v -t -e ssh nvidia@10.149.67.25:/home/nvidia/ros_workspace/ /mnt/c/DATA/ros_workspace/ -r
+
+einzelne daten kopieren mit scp, allerdings geht es nicht von remote nach remot zu kopieren, geht mit powershell
+scp pacheco@10.149.71.3:~/test.xml pacheco@192.168.0.5:~/test.xml
+scp pacheco@10.149.71.3:/home/pacheco/data/Master/bilddaten/test.list C:\Users\awachtberger\Desktop\weights
+scp pacheco@10.149.71.3:/home/pacheco/weights/tiny2/loss.txt C:\Users\awachtberger\Desktop\weights\tiny2
+scp C:\Users\awachtberger\Desktop\weights\test.list pacheco@192.168.0.5:/home/pacheco/data/Master/bilddaten/test.list 
+scp  pacheco@192.168.0.3:/home/pacheco/movie.mpg  C:\Data\movie.mpg
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+GIT
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+git rm --cached <dateiname> //um es zu behalten aber zu ignorieren
+git clone repository-url tmp && mv tmp/.git . && rm -rf tmp && git reset --hard //in ein nicht leeres verzeichnis klonen
