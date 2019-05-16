@@ -1,9 +1,0 @@
-This might help :
-.5R is recall for IoU>0.5 and .75R is recall for IoU>0.75
-Where:
-Recall = TP / (TP + FN)
-TP = number of detections with IoU>0.5 (0.75)
-FP = number of detections with IoU<=0.5 (0.75)or detected more than once
-FN = number of objects that are not detected or detected with IoU<=0.5 (0.75)
-
-setsid /home/pacheco/darknet/darknet detector train /home/pacheco/darknet/cyclist/cyclist.data  /home/pacheco/darknet/cyclist/train.cfg /home/pacheco/darknet/backup/train.backup -gpus 0,1
